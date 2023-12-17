@@ -5,7 +5,8 @@ module.exports = {
     async getUsers(req, res) {
       try {
         const users = await User.find()
-        .populate('thoughts');
+        .populate('thoughts')
+        .populate('friends')
         res.json(users);
       } catch (err) {
         res.status(500).json(err);
@@ -14,7 +15,8 @@ module.exports = {
     async getUser(req, res) {
         try {
           const user = await User.findOne({ _id: req.params.userId })
-          .populate('thoughts');
+          .populate('thoughts')
+          .populate('friends');
     
           if (!user) {
             return res.status(404).json({ message: 'No user with that ID' });
@@ -61,7 +63,7 @@ module.exports = {
           }
     
           await Thoughts.deleteMany({ _id: { $in: user.thoughts } });
-          res.json({ message: 'User and thouhgts deleted!' });
+          res.json({ message: 'User and thoughts deleted!' });
         } catch (err) {
           res.status(500).json(err);
         }
@@ -69,21 +71,41 @@ module.exports = {
 
       async addFriend(req, res) {
         try {
-            const user = await User.findOneAndUpdate(
+            const friend = await User.findOneAndUpdate(
                 { _id: req.params.userId },
-                { $addToSet: { friend: req.body} },
+                { $addToSet: { friends: req.body} },
                 { runValidators: true, new: true }
             );
 
-            if (!user) {
+            if (!friend) {
                 return res.status(404)
                 .json({ message: 'No user found with that id'})
             }
 
-            res.json(user);
+            res.json(friend);
         } catch (err) {
             res.status(500).json(err);
         }
       },
-      
-    }
+      async deleteFriend(req, res) {
+        try {
+          const friend = await User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $pull: { friends: req.params.friendId  } },
+            { runValidators: true, new: true }
+          );
+    
+          if (!friend) {
+            return res
+              .status(404)
+              .json({ message: 'No user found with that ID :(' });
+          }
+    
+          res.json(friend);
+        } catch (err) {
+          res.status(500).json(err);
+        }
+      },
+    };
+
+    module.exports = userController;

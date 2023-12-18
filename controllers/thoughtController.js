@@ -1,12 +1,12 @@
 
-const { Thought, User } = require('../models');
+const { User, Thought } = require('../models');
 
-module.exports = {
+const thoughtController = {
     async getThoughts(req, res) {
         try {
             const thoughts = await Thought.find();
             res.json(thoughts);
-        }catch (err) {
+        } catch (err) {
             res.status(500).json(err);
         }
     },
@@ -93,7 +93,7 @@ module.exports = {
         try {
             const reaction = await Thought.findOneAndUpdate(
                 { _id: req.params.thoughId },
-                { $pull: { reactions: { _id: req.params. reactionId } } },
+                { $pull: { reactions: { _id: req.params.reactionId } } },
                 { runValidators: true, new: true }
             );
 
@@ -107,3 +107,5 @@ module.exports = {
         }
     },
 };
+
+module.exports = thoughtController;

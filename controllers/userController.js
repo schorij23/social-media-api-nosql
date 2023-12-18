@@ -1,4 +1,4 @@
-const { User, Thoughts } = require("../Models");
+const { User, Thoughts } = require("../models");
 
 module.exports = {
     // Get all courses
@@ -107,5 +107,3 @@ module.exports = {
         }
       },
     };
-
-    module.exports = userController;

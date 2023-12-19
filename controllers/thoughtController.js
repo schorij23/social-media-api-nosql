@@ -13,7 +13,7 @@ const thoughtController = {
 
     async getThought (req,res) {
         try {
-            const thought = await Thought.findOne({ _id: req.params.thoughId });
+            const thought = await Thought.findOne({ _id: req.params.thoughtId });
 
             if (!thought) {
                 return res.status(404).json({ message: 'No thought with that ID' });
@@ -74,7 +74,7 @@ const thoughtController = {
     async addReaction(req, res) {
         try {
             const reaction = await Thought.findOneAndUpdate(
-                { _id: req.params.thoughId },
+                { _id: req.params.thoughtId },
                 { $addToSet: { reactions: req.body } },
                 { runValidators: true }
             );
@@ -92,7 +92,7 @@ const thoughtController = {
     async deleteReaction(req, res) {
         try {
             const reaction = await Thought.findOneAndUpdate(
-                { _id: req.params.thoughId },
+                { _id: req.params.thoughtId },
                 { $pull: { reactions: { _id: req.params.reactionId } } },
                 { runValidators: true, new: true }
             );

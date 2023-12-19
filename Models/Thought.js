@@ -1,6 +1,7 @@
 
 const { Schema, model } = require('mongoose');
 const reactionSchema = require('./Reaction');
+const dayjs = require('dayjs');
 const thoughtSchema = new Schema(
     {
         thoughtText: {
@@ -29,6 +30,8 @@ const thoughtSchema = new Schema(
     thoughtSchema.virtual('reactionCount').get(function () {
         return this.reactions.length;
     });
+
+    
 
     const Thought = model('thought', thoughtSchema);
 

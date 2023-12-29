@@ -13,6 +13,7 @@ const thoughtSchema = new Schema(
         cratedAt: {
             type: Date,
             default: Date.now,
+            get: createdFormat => dayjs(createdFormat).format('MMM DD, YYYY hh:mm a')
         },
         username: {
             type: String,
@@ -23,6 +24,7 @@ const thoughtSchema = new Schema(
     {
         toJSON: {
             virtuals: true,
+            getters: true
         },
         id: false,
     });

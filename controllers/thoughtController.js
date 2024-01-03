@@ -1,7 +1,8 @@
 
 const { User, Thought } = require('../models');
-
+// Defines thoughtControllers asynchronous methods
 const thoughtController = {
+    // Get all thoughts
     async getThoughts(req, res) {
         try {
             const thoughts = await Thought.find();
@@ -10,7 +11,7 @@ const thoughtController = {
             res.status(500).json(err);
         }
     },
-
+    // Get a single thought by its ID
     async getThought (req,res) {
         try {
             const thought = await Thought.findOne({ _id: req.params.thoughtId });
@@ -24,7 +25,7 @@ const thoughtController = {
             res.status(500).json(err);
         }
     },
-
+    // Create and associate a new thought with a user
     async createThought (req, res) {
         try {
             const thought = await Thought.create(req.body);
@@ -40,7 +41,7 @@ const thoughtController = {
             return res.status(500).json(err);
         }
     },
-
+    // Update a thought by ID
     async updateThought(req, res) {
         try {
             const thought = await Thought.findOneAndUpdate(
@@ -57,7 +58,7 @@ const thoughtController = {
             return res.status(500).json(err);
         }
     },
-
+    // Delete a thought by its ID
     async deleteThought(req, res) {
         try {
             const thought = await Thought.findOneAndDelete({ _id: req.params.thoughtId, });
@@ -70,7 +71,7 @@ const thoughtController = {
             return res.status(500).json(err);
         }
     },
-
+    // Add a reaction to a thought by its ID
     async addReaction(req, res) {
         try {
             const reaction = await Thought.findOneAndUpdate(
@@ -88,7 +89,7 @@ const thoughtController = {
             return res.status(500).json(err);
         }
     },
-
+    // Delete a reaction from a thought by its ID and reaction ID
     async deleteReaction(req, res) {
         try {
             const reaction = await Thought.findOneAndUpdate(

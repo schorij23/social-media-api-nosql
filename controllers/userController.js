@@ -1,7 +1,7 @@
 const { User, Thought } = require("../models");
-
+// Defines userControllers asynchronous methods
 const userController = {
-    // Get all courses
+        // Get all users with their associated thoughts and friends
     async getUsers(req, res) {
       try {
         const users = await User.find()
@@ -12,6 +12,7 @@ const userController = {
         res.status(500).json(err);
       }
     },
+    // Get a single user by ID with associated thoughts and friends
     async getUser(req, res) {
         try {
           const user = await User.findOne({ _id: req.params.userId })
@@ -27,6 +28,7 @@ const userController = {
           res.status(500).json(err);
         }
       },
+      // Create a new user
       async createUser(req, res) {
         try {
           const user = await User.create(req.body);
@@ -36,7 +38,7 @@ const userController = {
           return res.status(500).json(err);
         }
       },
-
+      // Update user information by their ID
       async updateUser(req, res) {
         try {
           const user = await User.findOneAndUpdate(
@@ -54,6 +56,7 @@ const userController = {
           res.status(500).json(err);
         }
       },
+      // Delete a user by ID and associated thoughts
       async deleteUser(req, res) {
         try {
           const user = await User.findOneAndDelete({ _id: req.params.userId });
@@ -68,7 +71,7 @@ const userController = {
           res.status(500).json(err);
         }
       },
-
+      // Add a friend to a user's friend list by their IDs
       async addFriend(req, res) {
         try {
             const friend = await User.findOneAndUpdate(
@@ -87,6 +90,7 @@ const userController = {
             res.status(500).json(err);
         }
       },
+      // Delete a friend from a user's friend list by their IDs
       async deleteFriend(req, res) {
         try {
           const friend = await User.findOneAndUpdate(

@@ -40,9 +40,9 @@ This routes of this project are tested on [Insomnia](https://insomnia.rest/)
   - Email address schorij23@gmail.com
 
 ## Walkthrough
-USER ROUTES
+USER ROUTES<br>
 https://github.com/schorij23/social-media-api-nosql/assets/5600528/94deb777-536e-4829-9ded-9ef126030408
-THOUGHT ROUTES
+THOUGHT ROUTES<br>
 https://github.com/schorij23/social-media-api-nosql/assets/5600528/ed7acb8a-cd9d-4738-8f9e-1591447023e6
 FRIENDS AND REACTIONS ROUTES
 https://github.com/schorij23/social-media-api-nosql/assets/5600528/43f2ada9-7987-4d66-b604-a50ab5fb72ad
